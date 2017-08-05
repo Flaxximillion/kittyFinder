@@ -7,7 +7,7 @@ const jsonParser = bodyParser.json();
 const urlencodedParser = bodyParser.urlencoded({extended: false});
 let cat;
 
-const Sequelize = new sequelize('postgres://bdzotqeidhrgoa:d180e8abaf344ab6887c329a60fe8098ac6b1e32838e20782bd89b5d25192c0a@ec2-184-72-230-93.compute-1.amazonaws.com:5432/derd227lc2pjuc',{
+const Sequelize = new sequelize(process.env.DATABASE_URL,{
     define:{
         timestamps: false
     }
