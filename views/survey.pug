@@ -1,0 +1,29 @@
+extends layout
+
+block content
+    h1.center-align= title
+    p.center-align Find the cat of your life!
+
+    section.row#queryDiv
+        form(onsubmit='return submitForm()')
+            each val, index in catQuestions
+                div.input-field.col.s12
+                    h5=val.query
+                each val2, index2 in val.params
+                    p
+                        input(
+                            id=index2
+                            name=index
+                            type="radio"
+                            value=index2
+                            required
+                        )
+                        label(for=index2)=val2
+            button.waves-effect.waves-light.btn#submit Submit!
+
+    section#modal.modal
+        div.modal-content
+            h4#name
+            p#description
+        div.modal-footer
+            a.modal-action.modal-close.waves-effect.waves-green.btn-flat(href="#")
