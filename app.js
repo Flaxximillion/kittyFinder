@@ -8,21 +8,18 @@ const sequelize = require('sequelize');
 
 const index = require('./routes/index');
 const survey = require('./routes/survey');
+const submit = require('./routes/submit');
+const pg= require('pg');
+pg.defaults.ssl = true;
 //const result = require('./routes/result');
 
 const app = express();
 
-const Sequelize = new sequelize('\n' +
-    'postgres://bdzotqeidhrgoa:d180e8abaf344ab6887c329a60fe8098ac6b1e32838e20782bd89b5d25192c0a@ec2-184-72-230-93.compute-1.amazonaws.com:5432/derd227lc2pjuc&sslmode=require',{
-    dialect: 'postgres',
-    protocol: 'postgres',
-    dialectOptions: {
-        ssl: true
-    },
-    define:{
-        timestamps: false
-    }
-});
+const Sequelize = new sequelize(process.env.DATABASE_URL, {
+        define: {
+            timestamps: false
+        }
+    });
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -38,6 +35,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
 app.use('/survey', survey);
+app.use('/submit', submit);
 //app.use('/result', result);
 
 // catch 404 and forward to error handler

@@ -1,11 +1,20 @@
 extends layout
 
 block content
-    h1.center-align= title
-    p.center-align Find the cat of your life!
+    h1.center-align=title
+    p.center-align Submit a new kitty!
 
     section.row#queryDiv
-        form(onsubmit="return submitForm('survey')")
+        form(onsubmit="return submitForm('submit')")
+            div.input-field.col.s12
+                input(placeholder="Maine Coon" id="catName" type="text" name="catName").validate
+                label(for="catName") Cat Breed
+            div.input-field.col.s12
+                input(placeholder="http://example.com/cat.png" id="catImage" type="url" name="catImage").validate
+                label(for="catName") Cat Image
+            div.input-field.col.s12
+                textarea(id="catDescription" name="catDescription").materialize-textarea
+                label(for="catDescription") Describe this cat!
             each val, index in catQuestions
                 div.input-field.col.s12
                     h5=val.query
